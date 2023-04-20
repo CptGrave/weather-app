@@ -21,7 +21,6 @@ export default function Search({ onSearchChange }) {
           return {
             value: `${city.latitude} ${city.longitude}`,
             label: `${city.name}, ${city.countryCode}`,
-            //SHOULD BE OBJECT WITH OPTIONS PROP WHICH CONTAIN ARRAY OF OPTIONS
           }
         })
       }
