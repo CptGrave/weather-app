@@ -1,18 +1,20 @@
-import { 
+import {
   Accordion,
   AccordionItem,
   AccordionItemButton,
   AccordionItemHeading,
-  AccordionItemPanel 
+  AccordionItemPanel
 } from "react-accessible-accordion";
 
-const WEEK_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+import "./forecast.css"
+
+const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 export default function Forecast({ data }) {
 
   const dayOfTheWeek = new Date().getDay();
-  const forecastDays = WEEK_DAYS.slice(dayOfTheWeek,WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayOfTheWeek));
-  
+  const forecastDays = WEEK_DAYS.slice(dayOfTheWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayOfTheWeek));
+
   return (
     <>
       <label className="title">Daily</label>
@@ -22,13 +24,41 @@ export default function Forecast({ data }) {
             <AccordionItemHeading>
               <AccordionItemButton>
                 <div className="daily-item">
-                  <img alt="weather" className="icon-small" src={require(`../../icons/${item.weather[0].icon}.png`)}></img>
+                  <img alt="weather" className="icon-item" src={require(`../../icons/${item.weather[0].icon}.png`)}></img>
                   <label className="day">{forecastDays[idx]}</label>
                   <label className="description">{item.weather[0].description}</label>
+                  <label className="min-max">{Math.round(item.main.temp_min)} °C / {Math.round(item.main.temp_max)} °C</label>
                 </div>
               </AccordionItemButton>
             </AccordionItemHeading>
-            <AccordionItemPanel></AccordionItemPanel>
+            <AccordionItemPanel>
+              <div className="daily-details-grid">
+                <div className="daily-details-grid-label">
+                  <label>Pressure hPa</label>
+                  <label>{item.main.pressure}</label>
+                </div>
+                <div className="daily-details-grid-label">
+                  <label>Humidity</label>
+                  <label>{item.main.humidity} %</label>
+                </div>
+                <div className="daily-details-grid-label">
+                  <label>Clouds</label>
+                  <label>{item.clouds.all} %</label>
+                </div>
+                <div className="daily-details-grid-label">
+                  <label>Wind speed</label>
+                  <label>{item.wind.speed} m/s</label>
+                </div>
+                <div className="daily-details-grid-label">
+                  <label>Sea level</label>
+                  <label>{item.main.sea_level} m</label>
+                </div>
+                <div className="daily-details-grid-label">
+                  <label>Feels like</label>
+                  <label>{item.main.feels_like} °C</label>
+                </div>
+              </div>
+            </AccordionItemPanel>
           </AccordionItem>
         ))}
 
@@ -36,3 +66,5 @@ export default function Forecast({ data }) {
     </>
   )
 }
+
+// FINISH AT 117
