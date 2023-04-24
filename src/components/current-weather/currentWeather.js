@@ -41,4 +41,3 @@ export default function CurrentWeather({ data }) {
     </div>
   )
 }
-//FINISHED AT 28;19
